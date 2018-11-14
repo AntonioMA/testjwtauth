@@ -8,6 +8,7 @@
   <H1>Delegated Auth Test Page for Lambdas</H1>
   <p>
     To use delegated auth to consume APIs just do something like:
+    <pre>
     <code>
       // Sample of an API consuming method
       const consumeAPI = token => {
@@ -21,6 +22,7 @@
       // And the actual way to consume the API is...
       AuthHelper.ensureAuth().then(onsumeAPI);
     </code>
+  </pre>
   </p>
   <input type="button" id="testButton" value="Test Auth">
   <ul id="output">
