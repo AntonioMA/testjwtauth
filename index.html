@@ -1,14 +1,21 @@
 <!doctype html>
 <html>
 <head>
-<!--script defer src="https://jwtauth.appspot.e3r.io/authHelper/js/auth.js?x1"></script-->
-<script defer src="auth.js"></script>
+<script defer src="https://jwtauth.appspot.e3r.io/authHelper/js/auth.js?x2"></script>
+<!-->script defer src="auth.js"></script-->
 <script defer src="test.js"></script>
 </head>
 <body>
   <H1>Delegated Auth Test Page for Lambdas</H1>
   <p>
-    To use delegated auth to consume APIs just do something like:
+    To use delegated auth to consume APIs just include the following script on your code:
+    <pre>
+      <code>
+        https://jwtauth.appspot.e3r.io/authHelper/js/auth.js?somerandomstring
+      </code>
+    </pre>
+    (note, the ?somerandomstring is added to avoid getting an old version because of caching) and
+    then, when you want to consume an API:
     <pre>
     <code>
       // Sample of an API consuming method
