@@ -17,6 +17,7 @@
       xhr.open(aType, aURL);
       xhr.responseType = aResponseType || 'json';
       xhr.overrideMimeType && xhr.overrideMimeType('application/json');
+      xhr.withCredentials = true;
       if (aDataType) {
         // Note that this requires
         xhr.setRequestHeader('Content-Type', aDataType);
