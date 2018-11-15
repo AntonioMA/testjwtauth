@@ -99,7 +99,7 @@
               return;
             }
             clearInterval(int);
-            exports.removeEventListener(messageListener);
+            exports.removeEventListener('message', messageListener);
             authDone && (solve() || true) || reject(new Error('UNAUTHORIZED'));
             solve();
           }, 18);
