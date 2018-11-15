@@ -58,11 +58,7 @@
 
   let authDone = false;
   const getToken = () => Request.sendXHR('GET', tokenURL).
-    then(result => result && result.accessToken && result || Promise.reject(new Error('UNAUTHORIZED'))).
-    catch((aError) => {
-      debug.error('getJWT sendXHR error:', aError);
-      return Promise.reject('UNAUTHORIZED'); // eslint-disable-line
-    });
+    then(result => result && result.accessToken && result || Promise.reject(new Error('UNAUTHORIZED')));
 
   let lastAnswer = null;
   let lastRequestPromise = null;
