@@ -68,7 +68,6 @@
   //  - if auth is not done, a window will be open to authenticate the calls
   //  - Once the window is closed, we try getting the token, and if it succeeds then we're
   //    authenticated
-
   const ensureAuth = () => {
     const isValidToken = lastAnswer && lastAnswer.expiresAt > Date.now();
     if (authDone && isValidToken) {
@@ -108,7 +107,7 @@
         }
         lastAnswer = token;
         lastAnswer.expiresAt *= 1000;
-        return token;
+        return token.accessToken;
       }).catch((e) => {
         if (authDone) {
           authDone = false;
