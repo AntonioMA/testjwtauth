@@ -37,8 +37,8 @@
           }
           resolve(response);
         } else {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ status: xhr.status, reason: xhr.response });
+          debug.warn('Error getting auth token:', { status: xhr.status, reason: xhr.response });
+          reject(new Error('UNAUTHORIZED'));
         }
       };
 
