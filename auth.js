@@ -102,7 +102,20 @@
           return null;
         }
         return solve();
-      }).then(getToken).then(token => token && (lastAnswer = token) && token.accessToken);
+      }).then(getToken).then((token) => {
+        if (!token) {
+          return null;
+        }
+        lastAnswer = token;
+        lastAnswer.expiresAt *= 1000;
+        return token;
+      }).catch((e) => {
+        if (authDone) {
+          authDone = false;
+          return ensureAuth();
+        }
+        return Promise.reject(e);
+      });
     }
     return lastRequestPromise;
   };
