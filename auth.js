@@ -58,7 +58,7 @@
 
   let authDone = false;
   const getToken = () => Request.sendXHR('GET', tokenURL).
-    then(result => (authDone = true) && result).
+    then(result => result && result.accessToken && result || Promise.reject(new Error('UNAUTHORIZED'))).
     catch((aError) => {
       debug.error('getJWT sendXHR error:', aError);
       return Promise.reject('UNAUTHORIZED'); // eslint-disable-line
@@ -82,6 +82,15 @@
       lastRequestPromise = new Promise((solve, reject) => {
         if (!authDone) {
           const authWindow = exports.open(authURL);
+          const messageListener = (e) => {
+            const { origin } = e;
+            if (origin !== server) {
+              debug.log('Invalid message, origin: ', origin, 'expected:', server);
+              return;
+            }
+            authDone = true;
+          };
+          exports.addEventListener('message', messageListener);
           if (!authWindow) {
             return reject(new Error('POPUP_DENY'));
           }
@@ -90,6 +99,8 @@
               return;
             }
             clearInterval(int);
+            exports.removeEventListener(messageListener);
+            authDone && (solve() || true) || reject(new Error('UNAUTHORIZED'));
             solve();
           }, 18);
           return null;
