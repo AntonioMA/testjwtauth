@@ -57,7 +57,7 @@
   };
 
   let authDone = false;
-  const getToken = () => Request.sendXHR('GET', tokenURL).
+  const getToken = () => Request.sendXHR('GET', tokenURL, null, null, null, {"x-consumer-id": "xxx"}).
     then(result => result && result.accessToken && result || Promise.reject(new Error('UNAUTHORIZED')));
 
   let lastAnswer = null;
